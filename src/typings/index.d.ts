@@ -6,3 +6,7 @@ declare module "*.vue" {
 interface NodeRequire {
   context(arg1: string, arg2: boolean, arg3: RegExp);
 }
+
+interface Vue {
+  readonly $router: any;
+}

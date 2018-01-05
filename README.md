@@ -9,7 +9,7 @@ Balance management of cryptocurrency.
 
 ## Features
 
-Working in progress...
+Work in progress...
 
 * [ ] Auto calculate balances/pricing from your addresses.
   * [ ] Support multiple currencies/tokens such as Bitcoin, Litecoin, Ethereum and others.
