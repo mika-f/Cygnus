@@ -13,10 +13,10 @@ import { Action, Getter } from "vuex-class";
 export default class LoadingComponent extends Vue {
   @Action("loadCurrencies") public loadCurrencies: () => Promise<void>;
 
-  @Getter("isCurrenciesLoaded") private isCurrenciesLoaded: boolean;
+  @Getter("isTickersLoaded") private isTickersLoaded: boolean;
 
-  @Watch("isCurrenciesLoaded")
-  public onIsCurrenciesLoadedChanged(newValue: boolean, oldValue: boolean): void {
+  @Watch("isTickersLoaded")
+  public onIsTickersLoadedChanged(newValue: boolean, oldValue: boolean): void {
     this.$router.push("home");
   }
 

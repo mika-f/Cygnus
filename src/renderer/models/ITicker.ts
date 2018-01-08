@@ -1,4 +1,4 @@
-export interface ICurrency {
+export interface ITicker {
   id: string;
   name: string;
   symbol: string;

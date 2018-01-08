@@ -1,12 +1,12 @@
 <template lang="pug">
-  ui-modal(title="Add new address" dismiss-on="close-button esc" ref="modal")
+  ui-modal(title="Add new address" dismiss-on="close-button esc" ref="modal" @close="onClose")
     div
       ui-select(has-search
         error="This field is required." 
         label="Currency"
         help="Currency type that you input"
         placeholder="Select cryptocurrency"
-        :options="options"
+        :options="currencies"
         :invalid="isCurrencyTouched && form.currency.value.length === 0"
         @touch="isCurrencyTouched = true"
         v-model="form.currency")
@@ -24,10 +24,10 @@
           br
           | Example, you registered two Bitcoin addresses (addr1: 0.5 BTC, addr2: 1.2 BTC), we will display it as 1.7 BTC.
         p.danger
-          | DANGER: When does't provide (or not registered) block explorer, Cygnus can't track balance and display it as 0.0.
+          | DANGER: When block explorer provide wrong balances, Cygnus display wrong balance.
       
     div(slot="footer")
-      ui-button(color="primary") OK
+      ui-button(color="primary" @click="onClickOkButton" :disabled="form.currency.value.length === 0 || form.address.length === 0") OK
       ui-button(@click="hideAddressModal()") Cancel
 </template>
 
@@ -36,7 +36,7 @@ import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
 import { Action, Getter } from "vuex-class";
 
-import { ICurrency } from "../models/ICurrency";
+import { ISupportCurrency, supportedCurrencies } from "../models/currencies";
 
 interface IFormInput {
   address: string;
@@ -53,33 +53,39 @@ export default class NewAddressModalComponent extends Vue {
   public form: IFormInput = { address: "", currency: { label: "", value: "" } };
   public isAddressTouched: boolean = false;
   public isCurrencyTouched: boolean = false;
-  public options: IOption[] = [];
+  public currencies: IOption[] = supportedCurrencies.map(w => {
+    return { label: w.name, value: w.id };
+  });
 
   @Action("hideAddressModal") public hideAddressModal: () => void;
 
-  @Getter("isShowAddressModal") public isShowAddressModal: boolean;
+  @Action("registerAddress") public registerAddress: ({ address, currency }) => void;
 
-  @Getter("currencies") public currencies: ICurrency[];
+  @Getter("isShowAddressModal") public isShowAddressModal: boolean;
 
   @Watch("isShowAddressModal")
   public onIsShowAddressModalChanged(newValue: boolean, oldValue: boolean): void {
     if (newValue) {
-      this.initialize();
+      this.initializeForm();
       this.openModal();
     } else {
       this.closeModal();
     }
   }
 
-  private initialize(): void {
+  public onClose(): void {
+    this.hideAddressModal();
+  }
+
+  public onClickOkButton(): void {
+    this.registerAddress({ address: this.form.address, currency: this.form.currency.value });
+    this.hideAddressModal();
+  }
+
+  private initializeForm(): void {
     this.form = { address: "", currency: { label: "", value: "" } };
     this.isAddressTouched = false;
     this.isCurrencyTouched = false;
-    if (this.options.length === 0) {
-      this.currencies.forEach(w => {
-        this.options.push({ label: `${w.name} (${w.symbol})`, value: w.id });
-      });
-    }
   }
 
   private openModal(): void {
