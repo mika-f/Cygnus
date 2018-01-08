@@ -12,6 +12,7 @@ import { Action, Getter } from "vuex-class";
 @Component
 export default class LoadingComponent extends Vue {
   @Action("loadCurrencies") public loadCurrencies: () => Promise<void>;
+  @Action("loadAddresses") public loadAddresses: () => void;
 
   @Getter("isTickersLoaded") private isTickersLoaded: boolean;
 
@@ -21,6 +22,7 @@ export default class LoadingComponent extends Vue {
   }
 
   public async mounted(): Promise<void> {
+    this.loadAddresses();
     this.loadCurrencies();
   }
 }

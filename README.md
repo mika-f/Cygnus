@@ -19,6 +19,7 @@ Work in progress...
     * [ ] Support multiple exchanges such as bitFlyer, Zaif and others.
   * [ ] Support multiple addresses.
   * [ ] Show as fiat money balance that you lived in.
+  * [ ] Show as BTC value.
 * [ ] Show transactions in your addresses.
 * [ ] Logging
   * [ ] Balances
