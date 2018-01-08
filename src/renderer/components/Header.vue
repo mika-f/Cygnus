@@ -50,5 +50,9 @@ export default class HeaderComponent extends Vue {
 <style lang="scss" scoped>
 .balance {
   padding-right: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  font-size: 1.125rem;
+  margin: 0;
 }
 </style>

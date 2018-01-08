@@ -22,7 +22,9 @@ export default class AppComponent extends Vue {}
 </script>
 
 
-<style>
+<style lang="scss">
+@import "~material-design-lite/material.min.css";
+
 *,
 *::before,
 *::after {
@@ -35,8 +37,9 @@ html {
 
 body {
   color: #333333;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "ヒラギノ角ゴ ProN W3",
-    "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  background-color: white;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ",
+    Meiryo, sans-serif;
   margin: 0;
   padding: 0;
   width: 100%;

@@ -2,27 +2,36 @@ import { Btccom } from "./explorer/Btccom";
 import { ExplorerBase } from "./explorer/ExplorerBase";
 
 // Cygnus supported currencies/tokens.
-export interface ISupportCurrencyWithSolver {
-  // CoinMarketCap ID
-  id: string;
-
-  // Currenty/Token name
-  name: string;
-
-  // Balance solver ID
+export interface ISupportCurrencyWithSolver extends ISupportCurrency {
+  // Balance solver instance
   solver: ExplorerBase;
 }
 
 export interface ISupportCurrency {
+  // CoinMarketCap ID
   id: string;
+
+  // Currency/Token name
   name: string;
+
+  // Currency/Token symbol
+  symbol: string;
+
 }
 
 export const supportedCurrenciesWithSolver: ISupportCurrencyWithSolver[] = [
-  { id: "bitcoin", name: "Bitcoin", solver: new Btccom({ domain: "chain.api.btc.com" }) },
-  { id: "bitcoin-cash", name: "Bitcoin Cash", solver: new Btccom({ domain: "bch-chain.api.btc.com" }) },
+  { id: "bitcoin", name: "Bitcoin", symbol: "BTC", solver: new Btccom({ domain: "chain.api.btc.com" }) },
+  { id: "bitcoin-cash", name: "Bitcoin Cash", symbol: "BCH", solver: new Btccom({ domain: "bch-chain.api.btc.com" }) },
 ];
 
 export const supportedCurrencies: ISupportCurrency[] = supportedCurrenciesWithSolver.map((w) => {
-  return { id: w.id, name: w.name } as ISupportCurrency;
+  return w as ISupportCurrency;
 });
+
+export function resolveFromId(id: string): ISupportCurrencyWithSolver {
+  const currency = supportedCurrenciesWithSolver.find((w) => w.id === id);
+  if (currency) {
+    return currency as ISupportCurrencyWithSolver;
+  }
+  return {} as ISupportCurrencyWithSolver;
+}
