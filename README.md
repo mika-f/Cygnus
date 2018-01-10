@@ -11,12 +11,12 @@ Balance management of cryptocurrency.
 
 Work in progress...
 
-* [ ] Auto calculate balances/pricing from your addresses.
-  * [ ] Support multiple currencies/tokens such as Bitcoin, Litecoin, Ethereum and others.
+* [x] Auto calculate balances/pricing from your addresses.
+  * [x] Support multiple currencies/tokens such as Bitcoin, Litecoin, Ethereum and others.
     * It depends on the existence of block explorer.
   * [ ] Show current pricing of cryptocurrency/token.
     * Powered by CoinMarketCap.
-  * [ ] Support multiple addresses.
+  * [x] Support multiple addresses.
   * [ ] Support multiple exchanges such as bitFlyer, Zaif and others.
   * [ ] Show as fiat money balance that you lived in.
   * [ ] Show as BTC value.

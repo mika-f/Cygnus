@@ -25,12 +25,12 @@ const state: IState = {
 const mutations = {
   REGISTER_CURRENCY(state: IState, { address, id }): void {
     state.currencies.push({
-      addresses: [{ address } as IAddress],
+      addresses: [{ address, balance: 0 } as IAddress],
       id
     } as ITrackCurrency);
   },
   REGISTER_ADDRESS(state: IState, { address, id }): void {
-    getCurrency(state, id).addresses.push({ address } as IAddress);
+    getCurrency(state, id).addresses.push({ address, balance: 0 } as IAddress);
   },
   RESTORE_CURRENCY(state: IState, trackCurrency: ITrackCurrency): void {
     state.currencies.push(trackCurrency);

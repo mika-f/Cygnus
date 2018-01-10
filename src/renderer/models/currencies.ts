@@ -17,12 +17,13 @@ export interface ISupportCurrency {
 
   // Currency/Token symbol
   symbol: string;
-
 }
 
 export const supportedCurrenciesWithSolver: ISupportCurrencyWithSolver[] = [
   { id: "bitcoin", name: "Bitcoin", symbol: "BTC", solver: new Btccom({ domain: "chain.api.btc.com" }) },
   { id: "bitcoin-cash", name: "Bitcoin Cash", symbol: "BCH", solver: new Btccom({ domain: "bch-chain.api.btc.com" }) },
+  { id: "dash", name: "Dash", symbol: "DASH", solver: new BlockCypher({ currency: "dash" }) },
+  { id: "dogecoin", name: "Dogecoin", symbol: "DOGE", solver: new BlockCypher({ currency: "doge" }) },
   { id: "litecoin", name: "Litecoin", symbol: "LTC", solver: new BlockCypher({ currency: "ltc" }) },
 ];
 

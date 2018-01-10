@@ -59,7 +59,7 @@ export default class NewAddressModalComponent extends Vue {
 
   @Action("hideAddressModal") public hideAddressModal: () => void;
 
-  @Action("registerAddress") public registerAddress: ({ address, currency }) => void;
+  @Action("registerAddress") public registerAddress: ({ address, id }) => void;
 
   @Getter("isShowAddressModal") public isShowAddressModal: boolean;
 
@@ -78,7 +78,7 @@ export default class NewAddressModalComponent extends Vue {
   }
 
   public onClickOkButton(): void {
-    this.registerAddress({ address: this.form.address, currency: this.form.currency.value });
+    this.registerAddress({ address: this.form.address, id: this.form.currency.value });
     this.hideAddressModal();
   }
 
