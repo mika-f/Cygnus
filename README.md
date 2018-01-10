@@ -16,8 +16,8 @@ Work in progress...
     * It depends on the existence of block explorer.
   * [ ] Show current pricing of cryptocurrency/token.
     * Powered by CoinMarketCap.
-    * [ ] Support multiple exchanges such as bitFlyer, Zaif and others.
   * [ ] Support multiple addresses.
+  * [ ] Support multiple exchanges such as bitFlyer, Zaif and others.
   * [ ] Show as fiat money balance that you lived in.
   * [ ] Show as BTC value.
 * [ ] Show transactions in your addresses.

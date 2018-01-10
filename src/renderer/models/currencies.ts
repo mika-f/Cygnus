@@ -1,3 +1,4 @@
+import { BlockCypher } from "./explorer/BlockCypher";
 import { Btccom } from "./explorer/Btccom";
 import { ExplorerBase } from "./explorer/ExplorerBase";
 
@@ -22,6 +23,7 @@ export interface ISupportCurrency {
 export const supportedCurrenciesWithSolver: ISupportCurrencyWithSolver[] = [
   { id: "bitcoin", name: "Bitcoin", symbol: "BTC", solver: new Btccom({ domain: "chain.api.btc.com" }) },
   { id: "bitcoin-cash", name: "Bitcoin Cash", symbol: "BCH", solver: new Btccom({ domain: "bch-chain.api.btc.com" }) },
+  { id: "litecoin", name: "Litecoin", symbol: "LTC", solver: new BlockCypher({ currency: "ltc" }) },
 ];
 
 export const supportedCurrencies: ISupportCurrency[] = supportedCurrenciesWithSolver.map((w) => {

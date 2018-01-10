@@ -11,9 +11,6 @@ const state: IState = {
 };
 
 const mutations = {
-  UPDATE_BALANCE(state: IState, balance: number): void {
-    state.balance = balance;
-  },
   SHOW_ADDRESS_MODAL(state: IState): void {
     state.isShowAddressModal = true;
   },
@@ -23,9 +20,6 @@ const mutations = {
 };
 
 const actions = {
-  updateBalance({ commit }, balance: number): void {
-    commit("UPDATE_BALANCE", balance);
-  },
   showAddressModal({ commit }): void {
     commit("SHOW_ADDRESS_MODAL");
   },

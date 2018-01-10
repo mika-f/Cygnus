@@ -30,7 +30,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Watch } from "vue-property-decorator";
-import { Getter } from "vuex-class";
+import { Action, Getter } from "vuex-class";
 
 import { resolveFromId } from "../models/currencies";
 import { sumBalances, ITrackCurrency } from "../models/ITrackCurrency";
@@ -39,12 +39,27 @@ import { sumBalances, ITrackCurrency } from "../models/ITrackCurrency";
 export default class HomeComponent extends Vue {
   @Getter("currencies") public currencies: ITrackCurrency[];
 
+  @Action("updateBalances") public updateBalances: (id: string) => Promise<void>;
+
+  @Watch("currencies")
+  public async onCurrenciesChanged(newValue: ITrackCurrency[], oldValue: ITrackCurrency[]): Promise<void> {
+    // tslint:disable:no-console
+    console.log(newValue);
+    console.log(oldValue);
+  }
+
   public formatBalance(currency: ITrackCurrency): string {
     return `${sumBalances(currency)} ${resolveFromId(currency.id).symbol}`;
   }
 
   public name(currency: ITrackCurrency): string {
     return resolveFromId(currency.id).name;
+  }
+
+  public async mounted(): Promise<void> {
+    this.currencies.forEach(async w => {
+      await this.updateBalances(w.id);
+    });
   }
 }
 </script>
